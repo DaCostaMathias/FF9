@@ -17,7 +17,7 @@ namespace FF9
 			if (item.Length != 2) return false;
 
 			int fromBase = 10;
-			if (item[0][1] == 'x') fromBase = 16;
+           if (item[0].Length > 1 && item[0][1] == 'x') fromBase = 16;
 			ID = Convert.ToUInt32(item[0], fromBase);
 			Name = item[1];
 			return true;

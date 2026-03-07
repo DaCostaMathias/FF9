@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace FF9
     /// <summary>
     /// ChoiceWindow.xaml の相互作用ロジック
     /// </summary>
+  [ExcludeFromCodeCoverage]
     public partial class ChoiceWindow : Window
     {
 		public enum eType

@@ -35,7 +35,7 @@ namespace FF9
 				if (item.Length != 2) continue;
 
 				int fromBase = 10;
-				if (item[0][1] == 'x') fromBase = 16;
+               if (item[0].Length > 1 && item[0][1] == 'x') fromBase = 16;
 				dictionary.Add(Convert.ToUInt32(item[0], fromBase), item[1]);
 			}
 		}
