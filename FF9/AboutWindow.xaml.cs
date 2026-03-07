@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ namespace FF9
     /// <summary>
     /// AboutWindow.xaml の相互作用ロジック
     /// </summary>
+   [ExcludeFromCodeCoverage]
     public partial class AboutWindow : Window
     {
         public AboutWindow()
@@ -26,7 +29,11 @@ namespace FF9
 
 		private void LabelHP_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			System.Diagnostics.Process.Start("http://turtleinsect.php.xdomain.jp/");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "http://turtleinsect.php.xdomain.jp/",
+                UseShellExecute = true
+            });
 		}
 	}
 }

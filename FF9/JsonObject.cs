@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FF9
 {
+ [ExcludeFromCodeCoverage]
 	public class __invalid_type__10000State
 	{
 		public string mode { get; set; }
@@ -24,12 +26,14 @@ namespace FF9
 		public string timerDisplay { get; set; }
 	}
 
+ [ExcludeFromCodeCoverage]
 	public class __invalid_type__20000Event
 	{
 		public string gStepCount { get; set; }
 		public string gEventGlobal { get; set; }
 	}
 
+  [ExcludeFromCodeCoverage]
 	public class MiniGameCard : INotifyPropertyChanged
 	{
 		private string mID;
@@ -54,6 +58,7 @@ namespace FF9
 		public event PropertyChangedEventHandler PropertyChanged;
 	}
 
+  [ExcludeFromCodeCoverage]
 	public class __invalid_type__30000MiniGame
 	{
 		public string sWin { get; set; }
@@ -62,6 +67,7 @@ namespace FF9
 		public List<MiniGameCard> MiniGameCard { get; set; }
 	}
 
+    [ExcludeFromCodeCoverage]
 	public class Cur
 	{
 		public string hp { get; set; }
@@ -71,6 +77,7 @@ namespace FF9
 		public string capa { get; set; }
 	}
 
+    [ExcludeFromCodeCoverage]
 	public class Max
 	{
 		public string hp { get; set; }
@@ -80,6 +87,7 @@ namespace FF9
 		public string capa { get; set; }
 	}
 
+   [ExcludeFromCodeCoverage]
 	public class Elem
 	{
 		public string dex { get; set; }
@@ -88,6 +96,7 @@ namespace FF9
 		public string wpr { get; set; }
 	}
 
+    [ExcludeFromCodeCoverage]
 	public class Defence
 	{
 		public string p_def { get; set; }
@@ -96,6 +105,7 @@ namespace FF9
 		public string m_ev { get; set; }
 	}
 
+  [ExcludeFromCodeCoverage]
 	public class Basis
 	{
 		public string max_hp { get; set; }
@@ -106,6 +116,7 @@ namespace FF9
 		public string wpr { get; set; }
 	}
 
+   [ExcludeFromCodeCoverage]
 	public class Info
 	{
 		public string slot_no { get; set; }
@@ -116,6 +127,7 @@ namespace FF9
 		public string menu_type { get; set; }
 	}
 
+  [ExcludeFromCodeCoverage]
 	public class Bonus
 	{
 		public string dex { get; set; }
@@ -124,6 +136,7 @@ namespace FF9
 		public string wpr { get; set; }
 	}
 
+ [ExcludeFromCodeCoverage]
 	public class Player
 	{
 		public string name { get; set; }
@@ -145,6 +158,7 @@ namespace FF9
 		public List<string> sa { get; set; }
 	}
 
+  [ExcludeFromCodeCoverage]
 	public class Item : INotifyPropertyChanged
 	{
 		private string mID;
@@ -162,6 +176,7 @@ namespace FF9
 		public event PropertyChangedEventHandler PropertyChanged;
 	}
 
+    [ExcludeFromCodeCoverage]
 	public class __invalid_type__40000Common
 	{
 		public List<Player> players { get; set; }
@@ -176,6 +191,7 @@ namespace FF9
 		public List<string> rareItems { get; set; }
 	}
 
+    [ExcludeFromCodeCoverage]
 	public class Cfg
 	{
 		public string sound { get; set; }
@@ -197,17 +213,20 @@ namespace FF9
 		public string skip_btl_camera { get; set; }
 	}
 
+   [ExcludeFromCodeCoverage]
 	public class __invalid_type__50000Setting
 	{
 		public Cfg cfg { get; set; }
 		public string time { get; set; }
 	}
 
+ [ExcludeFromCodeCoverage]
 	public class __invalid_type__60000Sound
 	{
 		public string auto_save_bgm_id { get; set; }
 	}
 
+ [ExcludeFromCodeCoverage]
 	public class __invalid_type__70000World
 	{
 		[JsonProperty("data.cameraState.rotationMax")]
@@ -226,6 +245,7 @@ namespace FF9
 		public string __invalid_name__data_hintmap { get; set; }
 	}
 
+   [ExcludeFromCodeCoverage]
 	public class __invalid_type__80000Achievement
 	{
 		public List<string> AteCheckArray { get; set; }
@@ -246,6 +266,7 @@ namespace FF9
 		public List<string> QuadmistWinList { get; set; }
 	}
 
+    [ExcludeFromCodeCoverage]
 	public class __invalid_type__94000Common
 	{
 		[JsonProperty("00001_player_bonus")]
@@ -254,6 +275,7 @@ namespace FF9
 		public List<string> __invalid_name__99999_ReservedBuffer { get; set; }
 	}
 
+   [ExcludeFromCodeCoverage]
 	public class __invalid_type__95000Setting
 	{
 		[JsonProperty("00001_time")]
@@ -262,6 +284,7 @@ namespace FF9
 		public List<string> __invalid_name__99999_ReservedBuffer { get; set; }
 	}
 
+   [ExcludeFromCodeCoverage]
 	public class __invalid_type__98000Achievement
 	{
 		[JsonProperty("00001_abnormal_status")]
@@ -302,6 +325,7 @@ namespace FF9
 		public List<string> __invalid_name__99999_ReservedBuffer { get; set; }
 	}
 
+   [ExcludeFromCodeCoverage]
 	public class Data
 	{
 		[JsonProperty("10000_State")]
@@ -340,6 +364,7 @@ namespace FF9
 		public List<string> __invalid_name__99000_Other { get; set; }
 	}
 
+ [ExcludeFromCodeCoverage]
 	public class RootObject
 	{
 		public Data Data { get; set; }
