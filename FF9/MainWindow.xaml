@@ -143,7 +143,9 @@
                     </ListBox>
                 </TabItem>
                 <TabItem Header="Card">
-                    <ListBox ItemsSource="{Binding Json.Data.__invalid_name__30000_MiniGame.MiniGameCard}">
+                    <DockPanel>
+                        <Button DockPanel.Dock="Top" Content="Give one of each card with perfect stats" Click="ButtonGivePerfectCards_Click" Margin="4" Padding="8,4" HorizontalAlignment="Left"/>
+                        <ListBox ItemsSource="{Binding Json.Data.__invalid_name__30000_MiniGame.MiniGameCard}">
                         <ListBox.Resources>
                             <local:CardValueConverter x:Key="CardValueConverter"/>
                         </ListBox.Resources>
@@ -174,7 +176,8 @@
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-                    </ListBox>
+                        </ListBox>
+                    </DockPanel>
                 </TabItem>
             </TabControl>
         </DockPanel>

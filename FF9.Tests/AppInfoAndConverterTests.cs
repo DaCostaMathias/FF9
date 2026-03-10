@@ -13,7 +13,7 @@ public sealed class AppInfoAndConverterTests
     {
         Assert.AreEqual("Dagger", AppInfo.Info.Items[0x01]);
         Assert.AreEqual("Goblin", AppInfo.Info.Cards[0x00]);
-        Assert.AreEqual("Test Ability", AppInfo.Info.Abilitys[0x01]);
+        Assert.AreEqual("Cure", AppInfo.Info.Abilitys[0x01]);
     }
 
     [TestMethod]
@@ -104,7 +104,7 @@ public sealed class AppInfoAndConverterTests
 
         object result = converter.Convert("1", typeof(string), null, CultureInfo.InvariantCulture);
 
-        Assert.AreEqual("Test Ability", result);
+        Assert.AreEqual("Cure", result);
     }
 
     [TestMethod]
