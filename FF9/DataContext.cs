@@ -33,5 +33,20 @@ namespace FF9
 			text = text.Replace("\"]", "\" ]");
 			System.IO.File.WriteAllText(filename, text);
 		}
+
+		public List<MiniGameCard> GetCardsSection()
+		{
+			if (Json?.Data?.__invalid_name__30000_MiniGame == null) return new List<MiniGameCard>();
+
+			return Json.Data.__invalid_name__30000_MiniGame.MiniGameCard;
+		}
+
+		public bool SetCardsSection(List<MiniGameCard> cards)
+		{
+			if (Json?.Data?.__invalid_name__30000_MiniGame == null) return false;
+			Json.Data.__invalid_name__30000_MiniGame.MiniGameCard = cards;
+			return true;
+
+		}
 	}
 }

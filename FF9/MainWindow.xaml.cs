@@ -68,9 +68,27 @@ namespace FF9
 			card.id = window.ID.ToString();
 		}
 
+		private void ButtonGivePerfectCards_Click(object sender, RoutedEventArgs e)
+		{
+			FF9.DataContext context = DataContext as FF9.DataContext;			
+
+			var cards = context.GetCardsSection();
+			if (cards != null)
+			{
+				cards.Clear();
+				cards.AddRange(CardCollectionFactory.CreatePerfectCollection());
+			}
+
+			context.SetCardsSection( CardCollectionFactory.CreatePerfectCollection());
+			CollectionViewSource.GetDefaultView(cards)?.Refresh();
+			
+			base.DataContext = null;
+			base.DataContext = context;
+		}
+
 		private void ButtonAbilityChoice_Click(object sender, RoutedEventArgs e)
 		{
 
-		}
+		}	
 	}
 }
