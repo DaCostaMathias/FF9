@@ -18,11 +18,11 @@ public sealed class CardCollectionFactoryTests
         CollectionAssert.AreEqual(expectedIds, cards.Select(card => card.id).ToList());
         Assert.IsTrue(cards.All(card =>
             card.type == "3" &&
-            card.side == "50" &&
-            card.atk == "10" &&
-            card.pdef == "10" &&
-            card.mdef == "10" &&
-            card.cpoint == "255" &&
+            card.side == "0" &&
+            card.atk == "255" &&
+            card.pdef == "255" &&
+            card.mdef == "255" &&
+            card.cpoint == "100" &&
             card.arrow == "255"));
     }
 }
