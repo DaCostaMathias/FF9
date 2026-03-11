@@ -94,7 +94,7 @@ namespace FF9
 
 		}
 		
-		private void ButtonGiveAllItem(object sender, RoutedEventArgs e)
+		private void ButtonGiveAllItem_Click(object sender, RoutedEventArgs e)
 		{
             FF9.DataContext context = DataContext as FF9.DataContext;
 			var items = context.GetItemsSection();

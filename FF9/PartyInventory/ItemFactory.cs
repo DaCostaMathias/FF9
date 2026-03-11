@@ -14,7 +14,7 @@ namespace FF9.PartyInventory
             var finalList = new List<Item>();
             return AppInfo.Info.Items
                 .Where(item => !string.IsNullOrWhiteSpace(item.Value))
-                .Select(item => new Item { id = item.Value, count = "50" }).ToList();
+                .Select(item => new Item { id = item.Key.ToString(), count = "50" }).ToList();
 
         }
     }
