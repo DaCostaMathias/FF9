@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FF9.Card;
+using FF9.PartyInventory;
 using Microsoft.Win32;
 
 namespace FF9
@@ -73,13 +75,14 @@ namespace FF9
 			FF9.DataContext context = DataContext as FF9.DataContext;			
 
 			var cards = context.GetCardsSection();
+			
 			if (cards != null)
 			{
 				cards.Clear();
-				cards.AddRange(CardCollectionFactory.CreatePerfectCollection());
 			}
 
-			context.SetCardsSection( CardCollectionFactory.CreatePerfectCollection());
+			cards.AddRange(CardCollectionFactory.CreatePerfectCollection());
+			context.SetCardsSection(cards);
 			CollectionViewSource.GetDefaultView(cards)?.Refresh();
 			
 			base.DataContext = null;
@@ -89,6 +92,21 @@ namespace FF9
 		private void ButtonAbilityChoice_Click(object sender, RoutedEventArgs e)
 		{
 
-		}	
+		}
+		
+		private void ButtonGiveAllItem(object sender, RoutedEventArgs e)
+		{
+            FF9.DataContext context = DataContext as FF9.DataContext;
+			var items = context.GetItemsSection();
+            if ( items != null)
+            {
+				items.Clear();
+            }
+			items.AddRange(ItemFactory.CreateFullInventory());
+			context.SetItemsSection(items);
+
+			DataContext = null;
+			DataContext = context;
+        }
 	}
 }

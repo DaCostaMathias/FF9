@@ -1,22 +1,25 @@
+using FF9.Ability;
+using FF9.Card;
+using FF9.PartyInventory;
 using System;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using Xunit;
 
 namespace FF9.Tests;
 
-[TestClass]
 public sealed class AppInfoAndConverterTests
 {
-    [TestMethod]
+    [Fact]
     public void AppInfoSingleton_LoadsDataFromInfoFiles()
     {
-        Assert.AreEqual("Dagger", AppInfo.Info.Items[0x01]);
-        Assert.AreEqual("Goblin", AppInfo.Info.Cards[0x00]);
-        Assert.AreEqual("Cure", AppInfo.Info.Abilitys[0x01]);
+        Assert.Equal("Dagger", AppInfo.Info.Items[0x01]);
+        Assert.Equal("Goblin", AppInfo.Info.Cards[0x00]);
+        Assert.Equal("Cure", AppInfo.Info.Abilitys[0x01]);
     }
 
-    [TestMethod]
+    [Fact]
     public void AppInfoConstructor_ParsesSupportedLinesAndSkipsInvalidOnes()
     {
         string originalDirectory = Environment.CurrentDirectory;
@@ -39,11 +42,11 @@ public sealed class AppInfoAndConverterTests
 
             AppInfo info = (AppInfo)constructor.Invoke(null);
 
-            Assert.AreEqual(2, info.Items.Count);
-            Assert.AreEqual("Potion", info.Items[7]);
-            Assert.AreEqual("Hi-Potion", info.Items[8]);
-            Assert.AreEqual(0, info.Cards.Count);
-            Assert.AreEqual(0, info.Abilitys.Count);
+            Assert.Equal(2, info.Items.Count);
+            Assert.Equal("Potion", info.Items[7]);
+            Assert.Equal("Hi-Potion", info.Items[8]);
+            Assert.Equal(0, info.Cards.Count);
+            Assert.Equal(0, info.Abilitys.Count);
         }
         finally
         {
@@ -55,59 +58,59 @@ public sealed class AppInfoAndConverterTests
         }
     }
 
-    [TestMethod]
+    [Fact]
     public void NameValueLine_ReturnsFalseForInvalidInput()
     {
         NameValue nameValue = new();
 
-        Assert.IsFalse(nameValue.Line("invalid"));
+        Assert.False(nameValue.Line("invalid"));
     }
 
-    [TestMethod]
+    [Fact]
     public void NameValueLine_ParsesDecimalAndHexValues()
     {
         NameValue nameValue = new();
 
-        Assert.IsTrue(nameValue.Line("7\tPotion"));
-        Assert.AreEqual((uint)7, nameValue.ID);
-        Assert.AreEqual("Potion", nameValue.Name);
+        Assert.True(nameValue.Line("7\tPotion"));
+        Assert.Equal((uint)7, nameValue.ID);
+        Assert.Equal("Potion", nameValue.Name);
 
-        Assert.IsTrue(nameValue.Line("0x08\tHi-Potion"));
-        Assert.AreEqual((uint)8, nameValue.ID);
-        Assert.AreEqual("Hi-Potion", nameValue.Name);
+        Assert.True(nameValue.Line("0x08\tHi-Potion"));
+        Assert.Equal((uint)8, nameValue.ID);
+        Assert.Equal("Hi-Potion", nameValue.Name);
     }
 
-    [TestMethod]
+    [Fact]
     public void ItemValueConverter_UsesItemDictionary()
     {
         ItemValueConverter converter = new();
 
         object result = converter.Convert("1", typeof(string), null, CultureInfo.InvariantCulture);
 
-        Assert.AreEqual("Dagger", result);
+        Assert.Equal("Dagger", result);
     }
 
-    [TestMethod]
+    [Fact]
     public void CardValueConverter_UsesCardDictionary()
     {
         CardValueConverter converter = new();
 
         object result = converter.Convert(0, typeof(string), null, CultureInfo.InvariantCulture);
 
-        Assert.AreEqual("Goblin", result);
+        Assert.Equal("Goblin", result);
     }
 
-    [TestMethod]
+    [Fact]
     public void AbilityValueConverter_UsesAbilityDictionary()
     {
         AbilityValueConverter converter = new();
 
         object result = converter.Convert("1", typeof(string), null, CultureInfo.InvariantCulture);
 
-        Assert.AreEqual("Cure", result);
+        Assert.Equal("Cure", result);
     }
 
-    [TestMethod]
+    [Fact]
     public void ConvertersConvertBack_ThrowNotImplementedException()
     {
         ItemValueConverter itemConverter = new();
@@ -117,5 +120,37 @@ public sealed class AppInfoAndConverterTests
         Assert.Throws<NotImplementedException>(() => itemConverter.ConvertBack("value", typeof(string), null, CultureInfo.InvariantCulture));
         Assert.Throws<NotImplementedException>(() => cardConverter.ConvertBack("value", typeof(string), null, CultureInfo.InvariantCulture));
         Assert.Throws<NotImplementedException>(() => abilityConverter.ConvertBack("value", typeof(string), null, CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void NameValueLine_ReturnsFalseForEmptyString()
+    {
+        NameValue nameValue = new();
+
+        Assert.False(nameValue.Line(string.Empty));
+    }
+
+    [Fact]
+    public void ItemValueConverter_ThrowsForUnknownKey()
+    {
+        ItemValueConverter converter = new();
+
+        Assert.Throws<KeyNotFoundException>(() => converter.Convert(99999, typeof(string), null, CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void CardValueConverter_ThrowsForUnknownKey()
+    {
+        CardValueConverter converter = new();
+
+        Assert.Throws<KeyNotFoundException>(() => converter.Convert(99999, typeof(string), null, CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void AbilityValueConverter_ThrowsForUnknownKey()
+    {
+        AbilityValueConverter converter = new();
+
+        Assert.Throws<KeyNotFoundException>(() => converter.Convert(99999, typeof(string), null, CultureInfo.InvariantCulture));
     }
 }

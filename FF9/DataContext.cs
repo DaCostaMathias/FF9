@@ -48,5 +48,18 @@ namespace FF9
 			return true;
 
 		}
-	}
+
+		public List<Item> GetItemsSection()
+		{
+			if (Json?.Data?.__invalid_name__40000_Common == null) return new List<Item>();
+			return Json.Data.__invalid_name__40000_Common.items;
+        }
+
+		public bool SetItemsSection(List<Item> items)
+		{
+			if (Json?.Data?.__invalid_name__40000_Common == null) return false;
+			Json.Data.__invalid_name__40000_Common.items = items;
+			return true;
+        }
+    }
 }

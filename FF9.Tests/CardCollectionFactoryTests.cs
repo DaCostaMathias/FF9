@@ -1,11 +1,12 @@
+using FF9.Card;
 using System.Linq;
+using Xunit;
 
 namespace FF9.Tests;
 
-[TestClass]
 public sealed class CardCollectionFactoryTests
 {
-    [TestMethod]
+    [Fact]
     public void CreatePerfectCollection_CreatesOnePerfectCopyPerNamedCard()
     {
         var cards = CardCollectionFactory.CreatePerfectCollection();
@@ -15,14 +16,14 @@ public sealed class CardCollectionFactoryTests
             .Select(card => card.Key.ToString())
             .ToList();
 
-        CollectionAssert.AreEqual(expectedIds, cards.Select(card => card.id).ToList());
-        Assert.IsTrue(cards.All(card =>
+        Assert.Equal(expectedIds, cards.Select(card => card.id).ToList());
+        Assert.True(cards.All(card =>
             card.type == "3" &&
             card.side == "0" &&
             card.atk == "255" &&
             card.pdef == "255" &&
             card.mdef == "255" &&
-            card.cpoint == "100" &&
+            card.cpoint == "0" &&
             card.arrow == "255"));
     }
 }

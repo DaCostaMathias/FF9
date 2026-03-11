@@ -1,9 +1,10 @@
+using Xunit;
+
 namespace FF9.Tests;
 
-[TestClass]
 public sealed class JsonObjectTests
 {
-    [TestMethod]
+    [Fact]
     public void ItemId_SetterRaisesPropertyChanged()
     {
         Item item = new();
@@ -12,10 +13,10 @@ public sealed class JsonObjectTests
 
         item.id = "12";
 
-        Assert.AreEqual("id", propertyName);
+        Assert.Equal("id", propertyName);
     }
 
-    [TestMethod]
+    [Fact]
     public void MiniGameCardId_SetterRaisesPropertyChanged()
     {
         MiniGameCard card = new();
@@ -24,6 +25,6 @@ public sealed class JsonObjectTests
 
         card.id = "34";
 
-        Assert.AreEqual("id", propertyName);
+        Assert.Equal("id", propertyName);
     }
 }

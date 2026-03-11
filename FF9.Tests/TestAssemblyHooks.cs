@@ -1,12 +1,12 @@
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace FF9.Tests;
 
-[TestClass]
-public sealed class TestAssemblyHooks
+public static class TestAssemblyHooks
 {
-    [AssemblyInitialize]
-    public static void Initialize(TestContext _)
+    [ModuleInitializer]
+    public static void Initialize()
     {
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
     }

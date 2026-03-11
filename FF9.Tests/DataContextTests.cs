@@ -1,29 +1,29 @@
 using System;
 using System.IO;
+using Xunit;
 
 namespace FF9.Tests;
 
-[TestClass]
 public sealed class DataContextTests
 {
-    [TestMethod]
+    [Fact]
     public void DefaultConstructor_UsesSingletonAppInfo()
     {
         DataContext context = new();
 
-        Assert.AreSame(AppInfo.Info, context.Info);
-        Assert.IsNull(context.Json);
+        Assert.Same(AppInfo.Info, context.Info);
+        Assert.Null(context.Json);
     }
 
-    [TestMethod]
+    [Fact]
     public void FileConstructor_LeavesJsonNullWhenFileDoesNotExist()
     {
         DataContext context = new(Path.Combine(Path.GetTempPath(), $"missing-{Guid.NewGuid():N}.json"));
 
-        Assert.IsNull(context.Json);
+        Assert.Null(context.Json);
     }
 
-    [TestMethod]
+    [Fact]
     public void FileConstructor_LoadsJsonFromDisk()
     {
         string fileName = Path.Combine(Path.GetTempPath(), $"FF9.Tests.{Guid.NewGuid():N}.json");
@@ -34,9 +34,9 @@ public sealed class DataContextTests
 
             DataContext context = new(fileName);
 
-            Assert.IsNotNull(context.Json);
-            Assert.AreEqual("99", context.Json.Data.__invalid_name__40000_Common.gil);
-            CollectionAssert.AreEqual(new[] { "state" }, context.Json.Data.__invalid_name__91000_State);
+            Assert.NotNull(context.Json);
+            Assert.Equal("99", context.Json.Data.__invalid_name__40000_Common.gil);
+            Assert.Equal(new[] { "state" }, context.Json.Data.__invalid_name__91000_State);
         }
         finally
         {
@@ -47,7 +47,7 @@ public sealed class DataContextTests
         }
     }
 
-    [TestMethod]
+    [Fact]
     public void Save_DoesNothingWhenJsonIsNull()
     {
         string fileName = Path.Combine(Path.GetTempPath(), $"FF9.Tests.{Guid.NewGuid():N}.json");
@@ -58,7 +58,7 @@ public sealed class DataContextTests
 
             context.Save(fileName);
 
-            Assert.IsFalse(File.Exists(fileName));
+            Assert.False(File.Exists(fileName));
         }
         finally
         {
@@ -69,7 +69,7 @@ public sealed class DataContextTests
         }
     }
 
-    [TestMethod]
+    [Fact]
     public void Save_WritesFormattedJson()
     {
         string fileName = Path.Combine(Path.GetTempPath(), $"FF9.Tests.{Guid.NewGuid():N}.json");
@@ -101,10 +101,10 @@ public sealed class DataContextTests
             context.Save(fileName);
 
             string text = File.ReadAllText(fileName);
-            Assert.IsTrue(text.Contains(", "));
-            Assert.IsTrue(text.Contains("[ {"));
-            Assert.IsTrue(text.Contains("} ]"));
-            Assert.IsTrue(text.Contains("[ \"state\" ]"));
+            Assert.True(text.Contains(", "));
+            Assert.True(text.Contains("[ {"));
+            Assert.True(text.Contains("} ]"));
+            Assert.True(text.Contains("[ \"state\" ]"));
         }
         finally
         {
@@ -113,5 +113,45 @@ public sealed class DataContextTests
                 File.Delete(fileName);
             }
         }
+    }
+
+    [Fact]
+    public void GetCardsSection_WhenJsonIsNull_ReturnsEmptyList()
+    {
+        DataContext context = new("nonexistent_file.json");
+
+        List<MiniGameCard> cards = context.GetCardsSection();
+
+        Assert.Equal(0, cards.Count);
+    }
+
+    [Fact]
+    public void SetCardsSection_WhenJsonIsNull_ReturnsFalse()
+    {
+        DataContext context = new("nonexistent_file.json");
+
+        bool result = context.SetCardsSection(new List<MiniGameCard>());
+
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void GetItemsSection_WhenJsonIsNull_ReturnsEmptyList()
+    {
+        DataContext context = new("nonexistent_file.json");
+
+        List<Item> items = context.GetItemsSection();
+
+        Assert.Equal(0, items.Count);
+    }
+
+    [Fact]
+    public void SetItemsSection_WhenJsonIsNull_ReturnsFalse()
+    {
+        DataContext context = new("nonexistent_file.json");
+
+        bool result = context.SetItemsSection(new List<Item>());
+
+        Assert.False(result);
     }
 }

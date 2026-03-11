@@ -1,1 +1,3 @@
-﻿[assembly: DoNotParallelize]
+﻿using Xunit;
+
+[assembly: CollectionBehavior(DisableTestParallelization = true)]

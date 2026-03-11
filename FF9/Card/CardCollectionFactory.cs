@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FF9
+namespace FF9.Card
 {
 	public static class CardCollectionFactory
 	{
@@ -10,7 +10,7 @@ namespace FF9
 			const string perfectType = "3"; // Unverified save-file encoding; likely the highest internal card type value.
 			const string perfectSide = "0"; // Unverified; public Tetra Master docs do not clearly describe this save field.
 			const string perfectStat = "255"; // Public Tetra Master docs describe visible card stats as hex digits, so 0xF is the max.
-			const string perfectPoints = "100"; // Unverified save-file encoding; chosen as the maximum byte value.
+			const string perfectPoints = "0"; // Unverified save-file encoding; chosen as the maximum byte value.
 			const string perfectArrows = "255"; // Likely correct because 0xFF enables all eight arrow bits.
 
 			return AppInfo.Info.Cards

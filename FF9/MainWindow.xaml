@@ -4,6 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FF9"
+        xmlns:partyInventory="clr-namespace:FF9.PartyInventory"
+        xmlns:ability="clr-namespace:FF9.Ability"
+        xmlns:card="clr-namespace:FF9.Card"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="FF9 SaveEditor(Nintendo Switch)" Height="450" Width="650">
@@ -46,7 +49,7 @@
                         <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Json.Data.__invalid_name__30000_MiniGame.sDraw, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Charactor">
+                <TabItem Header="Charactor" HorizontalAlignment="Left" Margin="-2,-2,0,0" Width="67">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -85,7 +88,7 @@
                         <TabControl Grid.Column="2">
                             <TabItem Header="Equipment">
                                 <TabItem.Resources>
-                                    <local:ItemValueConverter x:Key="ItemValueConverter"/>
+                                    <partyInventory:ItemValueConverter x:Key="ItemValueConverter"/>
                                 </TabItem.Resources>
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -109,7 +112,7 @@
                             <TabItem Header="Ability">
                                 <ListBox ItemsSource="{Binding ElementName=ListBoxParty, Path=SelectedItem.pa}">
                                     <ListBox.Resources>
-                                        <local:AbilityValueConverter x:Key="AbilityValueConverter"/>
+                                        <ability:AbilityValueConverter x:Key="AbilityValueConverter"/>
                                     </ListBox.Resources>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
@@ -124,10 +127,12 @@
                         </TabControl>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Item">
+                <TabItem Header="Item" HorizontalAlignment="Left" Margin="-2,-2,0,0" Width="39">
+                    <DockPanel>
+                        <Button DockPanel.Dock="Top" Content="Give 50 of each items" ToolTip="Leave the rare item as it is." Click="ButtonGivePerfectCards_Click" Margin="4" Padding="8,4" HorizontalAlignment="Left"/>
                     <ListBox ItemsSource="{Binding Json.Data.__invalid_name__40000_Common.items}">
                         <ListBox.Resources>
-                            <local:ItemValueConverter x:Key="ItemValueConverter"/>
+                            <partyInventory:ItemValueConverter x:Key="ItemValueConverter"/>
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -141,13 +146,14 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    </DockPanel>
                 </TabItem>
                 <TabItem Header="Card">
                     <DockPanel>
                         <Button DockPanel.Dock="Top" Content="Give one of each card with perfect stats" Click="ButtonGivePerfectCards_Click" Margin="4" Padding="8,4" HorizontalAlignment="Left"/>
                         <ListBox ItemsSource="{Binding Json.Data.__invalid_name__30000_MiniGame.MiniGameCard}">
                         <ListBox.Resources>
-                            <local:CardValueConverter x:Key="CardValueConverter"/>
+                            <card:CardValueConverter x:Key="CardValueConverter"/>
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
